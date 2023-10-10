@@ -22,4 +22,22 @@ We can pass something into our next()
     To handle that error, we have to catch it
     Express assumes that route handlers don't take in errors
 
+Error Handling Middleware
+    Takes in a 4th arg -> err
+    Generally at the end of the pipeline
+    Anytime we generate an Error, we need to add a statusCode
+        property to the new Error
+    We also have to set the status code in the middleware
+    Error handling middleware DRYs up our code
+
+Routers
+    Extension of our app object
+    Still need to import express
+    Create a router
+    The router obj behaves like the app object in many ways
+        but not all
+    Can attach a prefix to ensure that only related requests
+        hit that router
+
+
 */
