@@ -39,5 +39,25 @@ Routers
     Can attach a prefix to ensure that only related requests
         hit that router
 
+Environment Variables
+    There are a few common environments
+        Local
+            Dev
+            Testing
+        Production
+    What's the point?
+        Keep track of variable that vary based on env
+        Used to obscure sensitive info
+    2 ways to setup env
+        Through the CLI
+        .env file
+            npm install dotenv
+            npm install dotenv-cli
+
+            Have to add require('dotenv').config() at top
+                of the file
+
+
+
 
 */

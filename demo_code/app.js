@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+require('dotenv').config()
 
 const nameRouter = require('./routes/name')
 
@@ -29,6 +30,7 @@ const checkUserInput = (req, res, next) => {
 }
 
 app.get(['/test', '/status'], test, (req, res) => {
+    console.log(process.env.TEST)
     res.send('Hello from your first Express API')
 })
 
