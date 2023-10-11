@@ -70,5 +70,5 @@ We can do more
 Deleting and Updating data in the DB
     DELETE FROM <table name> WHERE <condition>;
     UPDATE <table name> SET <col name> = <value> WHERE <condition>;
-
+  
 */

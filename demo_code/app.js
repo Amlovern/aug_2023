@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
-require('dotenv').config()
+require('dotenv').config();
+const sqlite3 = require('sqlite3');
+
+const db = new sqlite3.Database(process.env.DB_FILE, sqlite3.OPEN_READWRITE);
 
 const nameRouter = require('./routes/name')
 
@@ -12,6 +15,23 @@ const test = (req, res, next) => {
     console.log(`path: ${req.path}`);
     next()
 }
+
+app.get('/', (req, res) => {
+    const sql = 'SELECT * FROM foods;'
+    db.all(sql, [], (err, rows) => {
+        if (err) return res.json(err);
+        res.json(rows);
+    })
+})
+
+app.get('/:foodId', (req, res) => {
+    const sql = 'SELECT * FROM foods WHERE id = ?;'
+    const params = [req.params.foodId]
+    db.get(sql, params, (err, row) => {
+        if (err) return res.json(err);
+        res.json(row)
+    })
+})
 
 // app.use((req, res, next) => {
 //     console.log('error test');
