@@ -57,4 +57,18 @@ For apostrophes, we use 2 single quotation marks
 
 '.header on' adds column names to the query
 '.mode column' cleans up query display
+
+SELECT * FROM foods;
+All queries need at least 2 statements: SELECT and FROM
+    SELECT - What cols do I want?
+    FROM - What table are we querying?
+We can do more
+    WHERE - Allows us to filter or target specific values
+        Can chain multiple filters using AND/OR
+        Can exclude using NOT
+
+Deleting and Updating data in the DB
+    DELETE FROM <table name> WHERE <condition>;
+    UPDATE <table name> SET <col name> = <value> WHERE <condition>;
+
 */
