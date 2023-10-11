@@ -25,6 +25,8 @@ HIGHLY recommend using .sql files over typing directly into terminal
 
 To run a .sql file, we use the .read <file name> cmd
 
+https://dbdiagram.io/d/65023a8702bd1c4a5e877f79
+
 To create a table, there is a formula that we can use
 CREATE TABLE <table name> (
     <column name> <data type> <attributes>
@@ -44,5 +46,15 @@ Using snake_case
 To remove a table:
     DROP TABLE <table name>;
 
+Inserting data into a DB
+    INSERT INTO <table name> (LIST OF COL WE ARE ADDING DATA FOR)
+    VALUES
+    <comma separated list of seeds>;
 
+SQL prefers single quotes, but will allow double. NO back ticks
+For apostrophes, we use 2 single quotation marks
+    'Kiki''s Delivery Service'
+
+'.header on' adds column names to the query
+'.mode column' cleans up query display
 */
