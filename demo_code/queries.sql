@@ -10,3 +10,24 @@ VALUES
 
 
 UPDATE foods SET price = kcal WHERE temp = 'hot';
+
+SELECT * FROM foods
+WHERE kcal BETWEEN 200 AND 700;
+
+SELECT * FROM foods
+WHERE foodnicity_id IN (1, 3);
+
+SELECT * FROM foods
+WHERE name LIKE '%O%n%';
+
+SELECT * FROM foods
+ORDER BY foodnicity_id, price;
+
+SELECT * FROM foods
+LIMIT 2
+OFFSET 2;
+
+SELECT id, name, price * kcal FROM foods
+ORDER BY price * kcal DESC;
+
+SELECT id, name AS food, price AS moneys FROM foods;
