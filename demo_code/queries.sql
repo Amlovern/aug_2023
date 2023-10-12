@@ -31,3 +31,37 @@ SELECT id, name, price * kcal FROM foods
 ORDER BY price * kcal DESC;
 
 SELECT id, name AS food, price AS moneys FROM foods;
+
+SELECT food_groups.name AS 'food group', foods.id, foods.name AS 'food name', price, foodnicitys.name
+FROM foods
+JOIN food_groups ON (food_groups.id = foods.food_group_id)
+JOIN foodnicitys ON (foods.foodnicity_id = foodnicitys.id);
+
+
+SELECT foods.name, meals.name
+FROM foods
+JOIN (meal_foods, meals) ON (foods.id = meal_foods.food_id AND meals.id = meal_foods.meal_id);
+
+
+
+-- The name and food group name of every food that is a protein or is considered healthy.
+-- I also want any meal information related to that food.
+-- I want it in order of most expensive -> least expensive.
+SELECT foods.name AS 'food name', food_groups.name AS 'food group name', meals.name AS 'meal name'
+FROM foods
+JOIN food_groups ON (food_groups.id = foods.food_group_id)
+JOIN meal_foods ON (meal_foods.food_id = foods.id)
+JOIN meals ON (meals.id = meal_foods.meal_id)
+WHERE food_groups.name = 'protein' OR healthy = 1
+ORDER BY price DESC;
+
+-- Select a meal that is a hot breakfast protein and it must be under $3 and not healthy
+-- ASC by food name
+SELECT meals.name
+FROM meals
+JOIN meal_foods ON (meal_foods.meal_id = meals.id)
+JOIN foods ON (foods.id = meal_foods.food_id)
+JOIN food_groups ON (food_groups.id = foods.food_group_id)
+WHERE temp = 'hot' AND meals.name = 'breakfast' AND food_groups.name = 'protein'
+AND price < 3 AND healthy = false
+ORDER BY foods.name;
