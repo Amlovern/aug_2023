@@ -65,3 +65,7 @@ JOIN food_groups ON (food_groups.id = foods.food_group_id)
 WHERE temp = 'hot' AND meals.name = 'breakfast' AND food_groups.name = 'protein'
 AND price < 3 AND healthy = false
 ORDER BY foods.name;
+
+SELECT AVG(price) FROM foods
+GROUP BY food_group_id
+HAVING AVG(price) < 10;
