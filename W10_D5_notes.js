@@ -36,4 +36,21 @@ ORDER BY
 LIMIT
 OFFSET
 
+Subqueries
+    Kind of like helper functions in SQL
+    Can generally be used to replace JOIN ON
+    Can also be used to get data from unrelated tables
+
+When writing a function, we should 2 questions before starting
+    What information do I have?
+    What information am I looking for?
+
+The purpose of a subquery is to return some info that the outer query can use
+
+SELECT * FROM <table>
+WHERE <FK col> = (
+    SELECT id FROM <other table>
+    WHERE <col> = <value>
+)
+
 */

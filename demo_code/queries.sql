@@ -69,3 +69,20 @@ ORDER BY foods.name;
 SELECT AVG(price) FROM foods
 GROUP BY food_group_id
 HAVING AVG(price) < 10;
+
+SELECT * FROM foods
+WHERE foodnicity_id = (
+    SELECT id FROM foodnicitys
+    WHERE name = 'american'
+);
+
+SELECT foods.id, foods.name, temp, kcal, price, foodnicity_id, food_group_id, healthy
+FROM foods
+JOIN foodnicitys ON (foodnicitys.id = foods.foodnicity_id)
+WHERE foodnicitys.id = 1;
+
+SELECT * FROM foodnicitys
+WHERE id IN (
+    SELECT foodnicity_id FROM foods
+    WHERE healthy = true
+);
