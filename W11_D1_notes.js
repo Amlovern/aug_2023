@@ -49,4 +49,20 @@ What is the difference between SCAN and SEARCH responses from EXPLAIN QUERY PLAN
     SEARCH - binary search (uses idx)
 
 Every time we add a UNIQUE constraint to a table, we are adding an index
+
+
+What is an N+1 Query?
+    Is when we run an initial query, then iterate over those results and for each result, we run an additional query
+
+During your time here at a/A, DO NOT worry about efficiency. Focus on getting your code to work.
+!! LAZY LOAD YOUR AGGREGATE DATA !!
+
+SQL Injection Attacks
+    A way to maliciously attack a DB by directly inserting SQL into a form or something
+
+Biggest takeaways from today:
+    How to benchmark a query
+    How to recognize N+1 queries
+
+
 */
