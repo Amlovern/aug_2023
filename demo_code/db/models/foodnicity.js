@@ -17,7 +17,15 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      validate: {
+        // isAlpha: true,
+        isCapitalized(value) {
+          if (value[0] !== value[0].toUpperCase()) {
+            throw new Error('Name must be capitalized!')
+          }
+        }
+      }
     }
   }, {
     sequelize,
