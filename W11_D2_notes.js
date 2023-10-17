@@ -73,4 +73,15 @@ To reset our DB:
 Table Reset Command:
     "dbreset": "npx dotenv sequelize db:seed:undo:all && npx dotenv sequelize db:migrate:undo:all && npx dotenv sequelize db:migrate && npx dotenv sequelize db:seed:all"
 
+bulkCreate is better than bulkInsert and can be setup like this:
+    1. Import the Model into the seed file
+    2. await <model>.bulkCreate([
+        <seeders>
+    ], {validate:true})
+
+Using migrations for something other than creating tables
+
+Create a new migrations file
+    npx sequelize migration:generate --name <descriptive name>
+
 */

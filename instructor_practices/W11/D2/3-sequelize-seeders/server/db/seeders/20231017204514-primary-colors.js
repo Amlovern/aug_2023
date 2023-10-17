@@ -1,13 +1,5 @@
 'use strict';
-const data = [
-  {name: 'American'},
-  {name: 'Mexican'},
-  {name: 'Asian'},
-  {name: 'European'},
-  {name: 'Middle Eastern'}
- ];
-
- const { Foodnicity } = require('../models');
+const {Color} = require('../models')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -21,8 +13,17 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-  //  await queryInterface.bulkInsert('Foodnicities', data)
-  await Foodnicity.bulkCreate(data, {validate:true})
+  //  await queryInterface.bulkInsert('Colors', [
+  //   {name: 'red'},
+  //   {name: 'blue'},
+  //   {name: 'yellow'}
+  //  ])
+
+   await Color.bulkCreate([
+    {name: 'red'},
+    {name: 'blue'},
+    {name: 'yellow'}
+   ], {validate:true})
   },
 
   async down (queryInterface, Sequelize) {
@@ -32,6 +33,8 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Foodnicities')
+    await queryInterface.bulkDelete('Colors', {
+      name: ['red', 'blue', 'yellow']
+    })
   }
 };
