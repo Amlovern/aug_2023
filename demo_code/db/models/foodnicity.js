@@ -26,6 +26,11 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       }
+    },
+    tasteGood: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      unique: true
     }
   }, {
     sequelize,

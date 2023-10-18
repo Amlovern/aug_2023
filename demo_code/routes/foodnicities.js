@@ -17,7 +17,7 @@ router.get('/:foodnicityId(\\d+)', async (req, res) => {
     });
 
     res.json(data)
-})
+});
 
 router.get('/:foodnicityName', async (req, res) => {
     const { foodnicityName } = req.params;
@@ -31,6 +31,31 @@ router.get('/:foodnicityName', async (req, res) => {
         attributes: ['id', 'name']
     });
     res.json(data);
+});
+
+router.post('/build', async (req, res) => {
+    const { name, tasteGood } = req.body;
+    const newFoodnicity = Foodnicity.build({
+        name,
+        tasteGood
+    });
+    // await Foodnicity.validate()
+    await newFoodnicity.validate()
+
+    // await Foodnicity.save()
+    await newFoodnicity.save()
+
+    res.json(newFoodnicity);
+});
+
+router.post('/create', async (req, res) => {
+    const { name, tasteGood } = req.body;
+    const newFoodnicity = await Foodnicity.create({
+        name,
+        tasteGood
+    });
+
+    res.json(newFoodnicity);
 });
 
 

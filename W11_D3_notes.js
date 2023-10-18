@@ -25,6 +25,23 @@ There are a variety of query methods that are built into our models
         We can use a Sequelize Operator
         https://sequelize.org/docs/v6/core-concepts/model-querying-basics/#operators
 
+POST Routes
+    Creating records
+        Build
+            (validate)
+        Save
+        Create
+            Does all of the other 3
 
+    We have to destructure our req.body
+    const <item> = <model>.build({<data>})
+    await <item>.validate()
+    await <item>.save()
+
+    res.json(<item>)
+
+    const <item> = await <model>.create({<data>});
+
+    res.json(<item>)
 
 */
