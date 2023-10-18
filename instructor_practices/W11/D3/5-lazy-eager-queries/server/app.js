@@ -46,12 +46,18 @@ app.get('/bands-lazy', async (req, res, next) => {
     for(let i = 0; i < allBands.length; i++){
         const band = allBands[i];
         // Your code here 
+        const musician = await Musician.findAll({
+            where: {
+                bandId: band.id
+            },
+            order: [['name']]
+        })
         const bandData = {
             id: band.id,
             name: band.name,
             createdAt: band.createdAt,
             updatedAt: band.updatedAt,
-            // Your code here 
+            Musicians: musician
         };
         payload.push(bandData);
     }
@@ -61,7 +67,11 @@ app.get('/bands-lazy', async (req, res, next) => {
 // STEP 3: Eager loading all bands
 app.get('/bands-eager', async (req, res, next) => {
     const payload = await Band.findAll({
-        // Your code here 
+        order: [['name']],
+        include: {
+            model: Musician,
+            order: [['firstName']]
+        }
     });
     res.json(payload);
 });
