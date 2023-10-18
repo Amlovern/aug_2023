@@ -44,4 +44,20 @@ POST Routes
 
     res.json(<item>)
 
+Update
+    <model>.update - NOT Recommended
+        This requires a where
+    Object property reassignment - Major preference
+        Must save()
+    Instance.update
+    Instance.set()
+
+    We have to make sure that we aren't updating values to undefined || Null accidentally
+        We can do this with if statements, ternaries, short circuiting
+
+Delete
+    <model>.destroy() - Not recommended
+    <instance>.destroy()
+
+
 */

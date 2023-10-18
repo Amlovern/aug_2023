@@ -58,5 +58,34 @@ router.post('/create', async (req, res) => {
     res.json(newFoodnicity);
 });
 
+router.put('/:foodnicityId/update', async (req, res) => {
+    const id = req.params.foodnicityId;
+    const { name, tasteGood } = req.body;
+    const data = await Foodnicity.findByPk(id);
+
+    if (name) {
+        data.name = name;
+    }
+    if (tasteGood !== undefined) {
+        data.tasteGood = tasteGood;
+    }
+
+    await data.save();
+
+    res.json(data);
+})
+
+router.delete('/:foodnicityId/delete', async (req, res) => {
+    const id = req.params.foodnicityId;
+    const data = await Foodnicity.findByPk(id);
+
+    await data.destroy();
+
+    res.json({
+        message: 'Successfully deleted',
+        data
+    })
+})
+
 
 module.exports = router;
