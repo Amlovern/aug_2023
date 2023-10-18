@@ -88,5 +88,11 @@ Associations
             otherKey: <FK to join to the join table on the other table>
         })
 
+Implementing these relationships in our Express
+    We can include multiple related tables by using the "include" property
+        include: {
+            model: <model name>
+        }
+    We can access our join table info by using the "through" property
 
 */
