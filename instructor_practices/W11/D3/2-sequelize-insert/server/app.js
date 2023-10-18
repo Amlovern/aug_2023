@@ -24,8 +24,22 @@ app.get('/puppies', async (req, res, next) => {
 // Use these values to BUILD a new Puppy in the database.
 // Respond to the request by sending a success message
 app.post('/puppies/build', async (req, res, next) => {
-    // Your code here 
-})
+    const { name, ageYrs, breed, weightLbs, microchipped } = req.body;
+    const newPuppy = Puppy.build({
+        name,
+        ageYrs,
+        breed,
+        weightLbs,
+        microchipped
+    });
+
+    await newPuppy.save();
+
+    res.json({
+        message: 'New Puppy built.',
+        data: newPuppy
+    });
+});
 
 // STEP 2
 // Capture the name, ageYrs, breed, weightLbs, and microchipped attributes
@@ -33,7 +47,19 @@ app.post('/puppies/build', async (req, res, next) => {
 // Use these values to CREATE a new Puppy in the database.
 // Respond to the request by sending a success message
 app.post('/puppies/create', async (req, res, next) => {
-    // Your code here 
+    const { name, ageYrs, breed, weightLbs, microchipped } = req.body;
+    const newPuppy = await Puppy.create({
+        name,
+        ageYrs,
+        breed,
+        weightLbs,
+        microchipped
+    });
+
+    res.json({
+        message: 'New Puppy created.',
+        data: newPuppy
+    });
 })
 
 
