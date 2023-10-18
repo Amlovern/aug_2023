@@ -11,6 +11,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Foodnicity.hasMany(models.Food, {
+        foreignKey: 'foodnicityId',
+        onDelete: 'CASCADE',
+        hooks: true
+      })
+      // JOIN Food ON (Food.foodnicityId = Foodnicity.id)
     }
   }
   Foodnicity.init({
@@ -30,7 +36,8 @@ module.exports = (sequelize, DataTypes) => {
     tasteGood: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      unique: true
+      unique: true,
+      defaultValue: true
     }
   }, {
     sequelize,
