@@ -59,5 +59,34 @@ Delete
     <model>.destroy() - Not recommended
     <instance>.destroy()
 
+Relationships in Sequelize
+        To tell Sequelize that a column is a FK, we need to add a couple properties
+            references: {
+                model: <other table name>,
+                key: 'id' (not needed unless the PK is something besides id)
+            }
+            onDelete: 'CASCADE' || 'SET NULL' (if desired)
+
+Associations
+    One to One
+        hasOne - not used much
+    One to Many
+        belongsTo
+        hasMany
+        We have to determine which is which, and the order does matter
+        The model with the FK is the belongsTo
+        <model we are in>.<relationship>(models.<other model name>, {
+            foreignKey: <name of the FK being used>
+        })
+        In order to "ON DELETE", we need to add some stuff to the hasMany
+            onDelete: 'CASCADE' || 'SET NULL',
+            hooks: true
+    Many to Many
+        belongsToMany(models.<name of model on other side of the joins table>, {
+            through: models.<name of model for join table>,
+            foreignKey: <FK to join to the join table>,
+            otherKey: <FK to join to the join table on the other table>
+        })
+
 
 */
