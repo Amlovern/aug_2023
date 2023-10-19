@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      FoodGroup.hasMany(models.Food, {
+        foreignKey: 'foodGroupId',
+        onDelete: 'SET NULL',
+        hooks: true
+      })
     }
   }
   FoodGroup.init({
