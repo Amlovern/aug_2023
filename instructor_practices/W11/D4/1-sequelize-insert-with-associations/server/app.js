@@ -15,12 +15,35 @@ app.use(express.json());
 
 // STEP 1: Creating from an associated model (One-to-Many)
 app.post('/bands/:bandId/musicians', async (req, res, next) => {
-    // Your code here 
+    const { firstName, lastName } = req.body;
+    const bandId = req.params.bandId;
+    const band = await Band.findByPk(bandId);
+
+    const musician = await band.createMusician({
+        firstName,
+        lastName
+    });
+
+    res.json({
+        message: `Created new musician for band ${band.name}.`,
+        musician
+    })
 })
 
 // STEP 2: Connecting two existing records (Many-to-Many)
 app.post('/musicians/:musicianId/instruments', async (req, res, next) => {
-    // Your code here 
+    const { instrumentIds } = req.body;
+    const musicianId = req.params.musicianId;
+    const musician = await Musician.findByPk(musicianId);
+
+    // for(let i = 0; i < instrumentIds.length; i++) {
+    //     await musician.addInstrument(instrumentIds[i])
+    // };
+    await musician.addInstruments(instrumentIds)
+
+    res.json({
+        message: `Associated ${musician.firstName} with instruments ${instrumentIds}.`
+    })
 })
 
 

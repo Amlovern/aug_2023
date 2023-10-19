@@ -74,6 +74,39 @@ router.post('/:foodId/newMealFood/:mealId', async (req, res) => {
         food,
         newMealFood
     })
+});
+
+router.get('/agg', async (req, res) => {
+    const highestKcal = await Food.max('kcal');
+    let mostExpensiveFood = await Food.findOne({
+        where: {
+            kcal: highestKcal
+        }
+    });
+
+    const lowestPrice = await Food.min('price');
+    const highestPrice = await Food.max('price');
+    const foodCount = await Food.count();
+    const totalPrice = await Food.sum('price');
+    const avgPrice = totalPrice / foodCount;
+    const hotFoodCount = await Food.count({
+        where: {
+            temp: 'hot'
+        }
+    })
+
+    mostExpensiveFood = mostExpensiveFood.toJSON();
+
+    mostExpensiveFood.lowestPrice = lowestPrice;
+    mostExpensiveFood.highestPrice = highestPrice;
+    mostExpensiveFood.foodCount = foodCount;
+    mostExpensiveFood.totalPrice = totalPrice;
+    mostExpensiveFood.avgPrice = avgPrice;
+    mostExpensiveFood.hotFoodCount = hotFoodCount;
+
+    res.json({
+        mostExpensiveFood
+    })
 })
 
 

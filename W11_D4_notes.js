@@ -13,5 +13,30 @@ Association Methods
     Add method
         In a Many to Many relationship, allows us to add a record to the Join table
 
+Dynamic Seeders
+    Restructure our seed data so that we have something that won't change about the related table (like a name), and then all of the related data that we need to seed
+    Iterate over that main array
+        Send a req to look for the related data (using the name)
+        Then iterate through our data, and seed using the id gained from the query
+
+Aggregate Functions
+    Our recommendation is to stick to basic class-level aggregate function and JS
+    We want to LAZY LOAD our aggregate data
+
+    Agg. Funcs
+        Min/Max
+            await <model>.<func>(<col>)
+        Count
+            await <model>.count()
+            Can also be achieved by finding the length of the return from findAll
+        Sum
+            await <model>.sum(<col>)
+        Avg can be calculated by writing simple JS combining these methods
+        These can also take in an object to add a where clause
+
+    The result from a query is NOT an object, it is instead a PROMISE
+        We can use <instance>.toJSON() to turn that promise into an object
+        VERY USEFUL in your project!!!!!!!!
+
 
 */
