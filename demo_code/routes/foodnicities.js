@@ -87,5 +87,25 @@ router.delete('/:foodnicityId/delete', async (req, res) => {
     })
 })
 
+router.post('/:foodnicityId/newFood', async (req, res) => {
+    const { name, temp, kcal, price, foodGroupId, healthy } = req.body
+    const id = req.params.foodnicityId;
+    const foodnicity = await Foodnicity.findByPk(id);
+
+    const newFood = await foodnicity.createFood({
+        name,
+        temp,
+        kcal,
+        price,
+        foodGroupId,
+        healthy
+    });
+
+    res.json({
+        foodnicity,
+        newFood
+    })
+})
+
 
 module.exports = router;
