@@ -81,6 +81,9 @@ router.get('/agg', async (req, res) => {
     let mostExpensiveFood = await Food.findOne({
         where: {
             kcal: highestKcal
+        },
+        attributes: {
+            exclude: ['createdAt', 'updatedAt']
         }
     });
 
@@ -97,12 +100,12 @@ router.get('/agg', async (req, res) => {
 
     mostExpensiveFood = mostExpensiveFood.toJSON();
 
-    mostExpensiveFood.lowestPrice = lowestPrice;
-    mostExpensiveFood.highestPrice = highestPrice;
-    mostExpensiveFood.foodCount = foodCount;
-    mostExpensiveFood.totalPrice = totalPrice;
-    mostExpensiveFood.avgPrice = avgPrice;
-    mostExpensiveFood.hotFoodCount = hotFoodCount;
+    // mostExpensiveFood.lowestPrice = lowestPrice;
+    // mostExpensiveFood.highestPrice = highestPrice;
+    // mostExpensiveFood.foodCount = foodCount;
+    // mostExpensiveFood.totalPrice = totalPrice;
+    // mostExpensiveFood.avgPrice = avgPrice;
+    // mostExpensiveFood.hotFoodCount = hotFoodCount;
 
     res.json({
         mostExpensiveFood
