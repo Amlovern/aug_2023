@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
         through: models.MealFood,
         foreignKey: 'foodId',
         otherKey: 'mealId'
+      });
+
+      Food.belongsTo(models.FoodGroup, {
+        foreignKey: 'foodGroupId'
       })
     }
   }
