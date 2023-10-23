@@ -6,6 +6,8 @@ const FoodnicitiesRouter = require('./routes/foodnicities');
 const FoodRouter = require('./routes/foods');
 
 app.use(express.json());
+app.use('/css', express.static('assets/css'));
+app.use('/images', express.static('assets/img'));
 
 app.use('/foodnicities', FoodnicitiesRouter);
 app.use('/food', FoodRouter);
