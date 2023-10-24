@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
+const { Op } = require('sequelize');
 
-const { Food } = require('./db/models');
+const { Food, FoodGroup } = require('./db/models');
 
 const FoodnicitiesRouter = require('./routes/foodnicities');
 const FoodRouter = require('./routes/foods');
@@ -38,6 +39,45 @@ app.get('/pagination', async (req, res) => {
     });
 
     res.json(food)
+})
+
+app.get('/search', async (req, res) => {
+    const { name, foodGroup, maxPrice } = req.query;
+    
+    const queryObj = {
+        include: [],
+        where: {}
+    };
+
+    if (name) {
+        queryObj.where.name = {
+            [Op.substring]: name
+        };
+    };
+
+    if (maxPrice) {
+        queryObj.where.price = {
+            [Op.lte]: maxPrice
+        };
+    };
+
+    if (foodGroup) {
+        queryObj.include.push({
+            model: FoodGroup,
+            where: {
+                name: foodGroup
+            },
+            attributes: {
+                exclude: ['createdAt' , 'updatedAt']
+            }
+        });
+    };
+
+    const foodData = await Food.findAll({
+        ...queryObj
+    });
+
+    res.json(foodData)
 })
 
 const port = process.env.PORT;
