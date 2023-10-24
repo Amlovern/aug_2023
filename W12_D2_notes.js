@@ -14,8 +14,15 @@ Pagination
             OFFSET: size * (page - 1)
 
 
-
 Search Filter
+    Should take in a name string and match partial food names in the db
+    Should take in a food group name and find all foods associated with that food group
+        This requires we have an "include" in our queryObj
+    Should take in a maxPrice and filter out all foods that cost more than that price
+
+    To avoid running into the same DRY issues as pagination, we can create a query object to hold our filters
+
+    We can then check that a query string has been passed in, then assign that value to our queryObj.where
 
 
 
