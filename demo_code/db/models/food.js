@@ -1,6 +1,7 @@
 'use strict';
 const {
-  Model
+  Model,
+  Op
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Food extends Model {
@@ -51,6 +52,24 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Food',
+    defaultScope: {
+      attributes: ['createdAt', 'updatedAt']
+    },
+    scopes: {
+      idNamePrice: {
+        attributes: ['id', 'name', 'price']
+      },
+      budgetOptions(price) {
+        //users can set their budget price and we give them the appropriate foods
+        return {
+          where: {
+            price: {
+              [Op.lte]: price
+            }
+          }
+        }
+      }
+    },
   });
   return Food;
 };
