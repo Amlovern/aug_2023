@@ -58,5 +58,14 @@ JWTs
     jwt.sign(<payload>, <secretKey>)
     jwt.verify(<token>, <secretKey>, <cb func>)
 
+Bcrypt
+    Allows us to hash values
+    We will be using this for password storage and password validation
+    The hash provided consists of algo, cost, salt(22 char), and hash
+    The cost factor tell bcrypt how many times to hash the password
+    A higher cost increases the amount of time it takes for a brute force attack to occur
+    We don't want to set the cost too high due to UX
+        Setting the cost factor to around 12-13 is the recommendation
+
 
 */
