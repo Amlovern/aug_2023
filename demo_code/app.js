@@ -80,5 +80,16 @@ app.get('/search', async (req, res) => {
     res.json(foodData)
 })
 
+app.get('/scopes', async (req, res) => {
+    const { price } = req.body;
+    const food = await Food.scope(['idNamePrice', 'defaultScope', {
+        method: ['budgetOptions', price]
+    }]).findAll({
+        include: FoodGroup
+    });
+
+    res.json(food)
+})
+
 const port = process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}...`))
